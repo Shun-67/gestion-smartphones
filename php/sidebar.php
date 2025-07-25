@@ -14,9 +14,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <div class="bottom">
     <?php if ($role === 'admin'): ?>
       <div class="admin-only">
-        <a href="ajouter.php" class="<?= $currentPage == 'ajouter.php' ? 'active' : '' ?>">
-          <i class="ri-add-circle-fill"></i> Ajouter smartphone
-        </a>
         <a href="parametres.php" class="<?= $currentPage == 'parametres.php' ? 'active' : '' ?>">
           <i class="ri-settings-3-fill"></i> Paramètres
         </a>

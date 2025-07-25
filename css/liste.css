@@ -26,6 +26,24 @@ body {
   gap: 20px;
 }
 
+.titre-marque {
+  position: relative;
+  font-size: 1.5em;
+  margin: 20px 0 10px;
+  color: #405189;
+  padding-bottom: 5px;
+}
+
+.titre-marque::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  height: 0;
+  border-bottom: 2px solid #62928bfc;
+}
+
 .card {
   background-color: white;
   border-radius: 10px;
@@ -104,30 +122,22 @@ body {
   color: #f39c12;
 }
 
-
 .toolbar {
   position: sticky;
   top: 0;
   right: 0;
   left: 240px; /* pour laisser la sidebar à gauche */
   z-index: 1000;
-  background-color: #fff;
-  max-width: 600px;
-  /* margin: auto; */
-  padding: 12px 20px;
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   gap: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-
-}
-
-.toolbar-left,
-.toolbar-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  background-color: #fff;
+  width: fit-content;
+  margin: 20px auto;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06); */
 }
 
 .select-wrapper {
@@ -135,103 +145,55 @@ body {
   display: inline-block;
 }
 
-.select-wrapper::after {
-  content: "▾"; /* flèche */
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #1abc9c;
-  font-size: 1rem;
-}
-
 select {
-  appearance: none;
-  -webkit-appearance: none;
-  padding: 8px 30px 8px 12px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
+  padding: 8px 20px;
+  font-size: 16px;
+  border: 1px #ccc;
   border-radius: 8px;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: #f5f7fb;
+  color: #2c3e50;
+  font-weight: bold;
+  white-space: nowrap;
   cursor: pointer;
 }
 
-select:focus {
-  border-color: #1abc9c;
-  outline: none;
-  box-shadow: 0 0 3px rgba(26, 188, 156, 0.5);
-}
-
-.btn {
-  background-color: #1abc9c;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.2s;
-}
-
-.btn:hover {
-  background-color: #16a085;
-}
-
-input[type="text"] {
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-
-
-.span_test::after {
-  /* display: block; */
-  content: "";
-  width: 8px;
-  height: 2px;
-  background-color: #3d1abc;
-  color: #61e73c;
-  position: absolute;
-  right: 10px;
-  bottom: 19px;
-  /* top: 2px; */
-  box-sizing: inherit;
-  
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-  padding: 10px 15px;
-  gap: 10px;
-  max-width: 600px;
-  margin: 20px auto;
-}
-
-.filter {
-  position: relative;
-  background-color: #f5f7fb;
-  padding: 8px 20px;
+option {
+  font-size: 16px;
   border-radius: 8px;
-  font-weight: bold;
+  background-color: #f5f7fb;
   color: #2c3e50;
+  font-weight: bold;
   white-space: nowrap;
+  cursor: pointer;
 }
 
-.filter:hover i {
-  color: #0d47a1; /* bleu plus foncé */
-  transform: rotate(180deg); /* optionnel : rotation de la flèche */
-  transition: all 0.2s ease;
+option:hover {
+  background-color: #2c3e50;
+}
+
+select:focus {
+  border-color: #304177;
+  outline: none;
+  box-shadow: 0 0 3px #304177;
+}
+
+select:hover {
+  box-shadow: 0 0 2px #3a4e8f;
+}
+
+form input {
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  outline: none;
+  flex: 1;
+  font-size: 1rem;
+  color: #666;
+  background-color: transparent;
 }
 
 .search-icon:hover i,
-.folder-icon:hover i {
+.add-icon:hover i {
   color: #333; /* couleur plus foncée au survol */
   transform: scale(1.2); /* agrandissement */
   transition: all 0.2s ease;
@@ -243,16 +205,8 @@ input[type="text"] {
   background-color: #ddd;
 }
 
-.search-icon, .folder-icon {
+.search-icon,
+.add-icon {
   color: #999;
   font-size: 1.2rem;
-}
-
-.search-bar input {
-  border: none;
-  outline: none;
-  flex: 1;
-  font-size: 1rem;
-  color: #666;
-  background-color: transparent;
 }
