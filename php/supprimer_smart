@@ -1,0 +1,10 @@
+<?php
+require_once 'db_connection.php';
+$id = $_GET['id'] ?? null;
+if ($id) {
+    $db = getDBConnection();
+    $stmt = $db->prepare("DELETE FROM smartphones WHERE id = ?");
+    $stmt->execute([$id]);
+}
+header('Location: view_smartphones.php');
+exit;

@@ -8,7 +8,6 @@ define('DBNAME', 'gestion_smartphones'); // mabdd doit être créé dans phpMyAd
 //Tentative de connexion aux données
 $cnx = mysqli_connect(SERVER, USER, PASS, DBNAME) or die(mysqli_connect_error());
 
-echo "Connexion aux données!\n";
 
 //Instruction de requête mysqli.query
 ?>
