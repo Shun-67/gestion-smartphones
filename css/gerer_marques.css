@@ -1,22 +1,33 @@
-/* body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  max-width: 700px;
-  margin: auto;
-} */
 
 main {
-    margin-left: 200px;
+  margin-left: 220px;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centrer horizontalement */
-  align-items: center; /* ou center si tu veux aussi centrer verticalement */
+  justify-content: center; 
+  align-items: flex-start;
+  gap: 50px; 
   padding: 40px 20px;
 }
 
+.add-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.add-edit h2 {
+  font-size: 15px;
+  color: #2c3e50;
+}
+
+
+.list {
+    width: 100%;
+}
 
 table {
-  width: fit-content;
+  width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
@@ -26,20 +37,68 @@ td {
   padding: 10px 20px;
   text-align: left;
 }
-th {
-  background: #f0f0f0;
+
+tr:nth-child(odd) {
+    background: #849ebd20;
 }
-a.btn {
+
+th{
+  background: #fff;
+}
+
+
+
+th.action {
+    width: 10px;
+}
+
+
+
+.icon {
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.icon:hover i {
+  transform: scale(1.2); /* agrandissement */
+  transition: all 0.2s ease;
+}
+
+.icon-edit:hover i {
+  color: #00990a; /* couleur plus foncée au survol */
+}
+
+.icon-edit {
+  color: #0ab364;
+  
+}
+
+.icon-delete {
+    color: #c10202;
+}
+
+.icon-delete:hover {
+    color: #790000;
+}
+
+
+/* a.btn {
   padding: 4px 10px;
-  background: #007bff;
-  color: white;
-  border-radius: 4px;
   text-decoration: none;
   font-size: 14px;
+  font-size: 16px;
+  border: 1px #ccc;
+  border-radius: 8px;
+  background-color: #e1eafc;
+  color: #405189;
+  white-space: nowrap;
+  cursor: pointer;
 }
 a.btn:hover {
-  background: #0056b3;
-}
+  background: #40518965
+} */
+
+
 form.inline {
   display: inline;
 }
