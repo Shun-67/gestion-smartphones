@@ -2,6 +2,8 @@
 require_once 'bd_connexion.php';
 require_once 'init_session.php';
 
+$currentPage = 'parametres.php';
+
 $role = $_SESSION['role'];
 
 if ($role !== 'admin') {

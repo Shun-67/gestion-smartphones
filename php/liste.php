@@ -12,8 +12,7 @@
 </head>
 
 <body>
-
-    <?php include 'sidebar.php'; ?>
+    <aside><?php include 'sidebar.php'; ?></aside>
     <main>
         <div class="main-content">
             <h2 class="page-title"> Smartphones disponibles</h2>
@@ -41,7 +40,7 @@
                 <input type="text" name="recherche" placeholder="Recherche..." value="<?= htmlspecialchars($recherche) ?>" />
                 <div class="separator"></div>
                 <?php if ($role === 'admin'): ?>
-                    <div class="add-icon"><a href="ajouter.php"><i class="ri-add-circle-fill"></i></a></div>
+                    <div class="add-icon"><a href="ajouter_smart.php"><i class="ri-add-circle-fill"></i></a></div>
                 <?php endif; ?>
 
             </form>
