@@ -1,5 +1,5 @@
 main {
-    margin-left: 220px;
+  margin-left: 220px;
   flex: 1;
   display: flex;
   align-items: center; /* ou center si tu veux aussi centrer verticalement */
@@ -15,7 +15,8 @@ main {
 }
 
 .form-ajout label {
-    color: #2a365b;
+  font-weight: bold;
+  color: #2a365b;
 }
 
 .form-ajout input[type="text"],
@@ -38,6 +39,7 @@ main {
   align-items: center;
   gap: 5px;
   font-size: 14px;
+  font-weight: lighter;
 }
 
 .color-badge {
@@ -64,46 +66,23 @@ main {
 
 .btn:hover {
   background-color: #0056b3; /* bleu plus foncé au hover */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn:active {
   background-color: #004080;
 }
 
-
 .select-add-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  /* margin-bottom: 12px; */
 }
 
 .select-add-container select {
-    flex-grow: 1;
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+  flex-grow: 1;
 }
-
-/* .add-link {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: #28a745;
-    color: white;
-    font-weight: bold;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    user-select: none;
-}
-
-.add-link:hover {
-    background-color: #218838;
-} */
 
 .btn-gestion {
   display: inline-block;
@@ -121,4 +100,23 @@ main {
   background-color: #0056b3;
 }
 
+.fill-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 
+.select-color-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* Message d’erreur */
+.error-message {
+  display: block;
+  background-color: #faeaea;
+  color: red;
+  padding: 0 0.7rem;
+  border-radius: 5px;
+}

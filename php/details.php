@@ -61,17 +61,17 @@ $couleurs = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     <main>
         <div class="container">
-            <h2 class="page-title">Détails du smartphone</h2>
+            <h1 class="page-title">Détails du smartphone</h1>
             <div class="card">
                 <img src="<?= htmlspecialchars($photo) ?>" alt="Photo du téléphone" class="photo">
 
                 <div class="info">
-                    <h1><?= htmlspecialchars($nom) ?></h1>
+                    <h2><?= htmlspecialchars($nom) ?></h2>
                     <p><strong>Marque :</strong> <?= htmlspecialchars($nom_marque) ?></p>
                     <p><strong>Prix :</strong> <?= number_format($prix, 0, ',', ' ') ?> FCFA</p>
                     <p><strong>RAM :</strong> <?= htmlspecialchars($capacite_ram) ?> Go</p>
                     <p><strong>ROM :</strong> <?= htmlspecialchars($capacite_rom) ?> Go</p>
-                    <p><strong>Ecran :</strong> <?= htmlspecialchars($ecran) ?> Go</p>
+                    <p><strong>Ecran :</strong> <?= htmlspecialchars($ecran) ?></p>
 
                     <?php if ($couleurs): ?>
                         <div>

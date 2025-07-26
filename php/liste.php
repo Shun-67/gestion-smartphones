@@ -15,7 +15,7 @@
     <aside><?php include 'sidebar.php'; ?></aside>
     <main>
         <div class="main-content">
-            <h2 class="page-title"> Smartphones disponibles</h2>
+            <h1 class="page-title"> Smartphones disponibles</h1>
 
             <form method="GET" class="toolbar">
                 <div class="select-wrapper">

@@ -59,26 +59,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ecran = trim($_POST['ecran'] ?? '');
     $couleurs_id = $_POST['couleurs'] ?? [];
 
-    if (!$nom) $errors[] = "Le nom est requis.";
-    if ($prix <= 0) $errors[] = "Le prix doit être positif.";
-    if (!$photo) $errors[] = "Le lien de la photo est requis.";
-    if (!$marque_id || !$ram_id || !$rom_id) $errors[] = "Sélectionnez marque, RAM et ROM.";
-    if (!$description) $errors[] = "La description est requise.";
-    if (!$ecran) $errors[] = "Le type d’écran est requis.";
+    if (!$nom) $errors['nom'] = "Le nom est requis.";
+    if ($prix <= 0) $errors['prix'] = "Le prix doit être positif.";
+    if (!$prix) $errors['prix'] = "Le prix est requis.";
+    if (!$photo) $errors['photo'] = "Le lien de la photo est requis.";
+    if (!$marque_id) $errors['marque'] = "Sélectionnez une marque.";
+    if (!$ram_id) $errors['ram'] = "Sélectionnez une RAM.";
+    if (!$rom_id) $errors['rom'] = "Sélectionnez une ROM.";
+    if (!$description) $errors['description'] = "La description est requise.";
+    if (!$ecran) $errors['ecran'] = "Le type d'écran est requis.";
+    if (!$couleurs_id) $errors['couleurs'] = "Sélectionnez au moins une couleur.";
 
     if (empty($errors)) {
-        $stmt = $cnx->prepare("INSERT INTO smartphones 
-            (nom, prix, photo, id_marque, id_ram, id_rom, description, ecran)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$nom, $prix, $photo, $marque_id, $ram_id, $rom_id, $description, $ecran]);
+        // Insertion du smartphone
+        $stmt = mysqli_prepare($cnx, "INSERT INTO smartphones 
+        (nom, prix, photo, id_marque, id_ram, id_rom, description, ecran)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-        $smartphone_id = $cnx->lastInsertId();
+        mysqli_stmt_bind_param(
+            $stmt,
+            "sdssiiis",
+            $nom,
+            $prix,
+            $photo,
+            $marque_id,
+            $ram_id,
+            $rom_id,
+            $description,
+            $ecran
+        );
 
-        $stmtC = $cnx->prepare("INSERT INTO smartphone_couleurs (id, id_couleur) VALUES (?, ?)");
+        mysqli_stmt_execute($stmt);
+        $smartphone_id = mysqli_insert_id($cnx);
+        mysqli_stmt_close($stmt);
+
+        // Insertion des couleurs associées
+        $stmtC = mysqli_prepare($cnx, "INSERT INTO smartphone_couleurs (id, id_couleur) VALUES (?, ?)");
+
         foreach ($couleurs_id as $cid) {
-            $stmtC->execute([$smartphone_id, $cid]);
+            mysqli_stmt_bind_param($stmtC, "ii", $smartphone_id, $cid);
+            mysqli_stmt_execute($stmtC);
         }
+        mysqli_stmt_close($stmtC);
 
+        // Redirection
         header("Location: details.php?id=" . $smartphone_id);
         exit;
     }
@@ -94,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
     <link href="../css/layout.css" rel="stylesheet">
-    <link href="../css/ajouter.css" rel="stylesheet">
+    <link href="../css/ajouter_smart.css" rel="stylesheet">
     <title>Ajouter smartphone</title>
 </head>
 
@@ -103,89 +127,124 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <aside><?php include 'sidebar.php'; ?></aside>
     <main>
         <div class="container">
-            <h2 class="page-title">Ajouter un smartphone</h2>
-
-            <?php if ($errors): ?>
-                <div style="color: red; margin-bottom: 15px;">
-                    <ul>
-                        <?php foreach ($errors as $e): ?>
-                            <li><?= htmlspecialchars($e) ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
+            <h1 class="page-title">Ajouter un smartphone</h1>
 
             <form method="post" class="form-ajout">
 
-                <label>Nom :</label>
-                <input type="text" name="nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" required>
+                <div class="fill-container">
+                    <label>Nom :</label>
+                    <input type="text" name="nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>">
+                    <?php if (isset($errors['marque'])): ?>
+                        <span class="error-message"><?= $errors['nom'] ?></span>
+                    <?php endif; ?>
+                </div>
 
-                <label>Prix (FCFA) :</label>
-                <input type="number" name="prix" value="<?= htmlspecialchars($_POST['prix'] ?? '') ?>" step="1" required>
+                <div class="fill-container">
+                    <label>Prix (FCFA) :</label>
+                    <input type="number" name="prix" value="<?= htmlspecialchars($_POST['prix'] ?? '') ?>" step="100">
+                    <?php if (isset($errors['marque'])): ?>
+                        <span class="error-message"><?= $errors['prix'] ?></span>
+                    <?php endif; ?>
+                </div>
 
-                <label>Photo (URL ou chemin) :</label>
-                <input type="text" name="photo" value="<?= htmlspecialchars($_POST['photo'] ?? '') ?>" required>
+                <div class="fill-container">
+                    <label>Photo (URL ou chemin) :</label>
+                    <input type="text" name="photo" value="<?= htmlspecialchars($_POST['photo'] ?? '') ?>">
+                    <?php if (isset($errors['marque'])): ?>
+                        <span class="error-message"><?= $errors['photo'] ?></span>
+                    <?php endif; ?>
+                </div>
 
-                <label>Marque :</label>
-                <!-- <select name="marque_id" required>
-                    <option value="">-- Choisir une marque --</option>
-                    <?php foreach ($marques as $m): ?>
-                        <option value="<?= $m['id_marque'] ?>" <?= ($_POST['marque_id'] ?? '') == $m['id_marque'] ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($m['nom_marque']) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <a href="?add=marque<?= isset($_GET['id']) ? '&id=' . (int)$_GET['id'] : '' ?>">Ajouter une marque</a> -->
-                <div class="select-add-container">
-                    <select name="marque_id" required>
-                        <option value="">-- Choisir une marque --</option>
-                        <?php foreach ($marques as $m): ?>
-                            <option value="<?= $m['id_marque'] ?>" <?= ($_POST['marque_id'] ?? '') == $m['id_marque'] ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($m['nom_marque']) ?>
-                            </option>
+                <div class="fill-container">
+                    <label>Marque :</label>
+                    <div class="select-add-container">
+                        <select name="marque_id">
+                            <option value="">-- Choisir une marque --</option>
+                            <?php foreach ($marques as $m): ?>
+                                <option value="<?= $m['id_marque'] ?>" <?= ($_POST['marque_id'] ?? '') == $m['id_marque'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($m['nom_marque']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <a href="gerer_marques.php?type=marque" class="btn-gestion">Gérer</a>
+                    </div>
+                    <?php if (isset($errors['marque'])): ?>
+                        <span class="error-message"><?= $errors['marque'] ?></span>
+                    <?php endif; ?>
+                </div>
+
+
+                <div class="fill-container">
+                    <label>RAM :</label>
+                    <div class="select-add-container">
+                        <select name="ram_id">
+                            <option value="">-- Choisir la RAM --</option>
+                            <?php foreach ($rams as $r): ?>
+                                <option value="<?= $r['id_ram'] ?>" <?= ($_POST['ram_id'] ?? '') == $r['id_ram'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($r['capacite_ram']) ?> Go
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <a href="gerer_marques.php?type=ram" class="btn-gestion">Gérer</a>
+                    </div>
+                    <?php if (isset($errors['ram'])): ?>
+                        <span class="error-message"><?= $errors['ram'] ?></span>
+                    <?php endif; ?>
+                </div>
+
+                <div class="fill-container">
+                    <label>ROM :</label>
+                    <div class="select-add-container">
+                        <select name="rom_id">
+                            <option value="">-- Choisir la ROM --</option>
+                            <?php foreach ($roms as $r): ?>
+                                <option value="<?= $r['id_rom'] ?>" <?= ($_POST['rom_id'] ?? '') == $r['id_rom'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($r['capacite_rom']) ?> Go
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <a href="gerer_marques.php?type=rom" class="btn-gestion">Gérer</a>
+                    </div>
+                    <?php if (isset($errors['rom'])): ?>
+                        <span class="error-message"><?= $errors['rom'] ?></span>
+                    <?php endif; ?>
+                </div>
+
+                <div class="fill-container">
+                    <label>Écran :</label>
+                    <input type="text" name="ecran" value="<?= htmlspecialchars($_POST['ecran'] ?? '') ?>">
+                    <?php if (isset($errors['ecran'])): ?>
+                        <span class="error-message"><?= $errors['ecran'] ?></span>
+                    <?php endif; ?>
+                </div>
+
+                <div class="fill-container">
+                    <label>Description :</label>
+                    <textarea name="description" rows="4"><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
+                    <?php if (isset($errors['description'])): ?>
+                        <span class="error-message"><?= $errors['description'] ?></span>
+                    <?php endif; ?>
+                </div>
+
+                <div class="fill-container">
+                    <div class="select-color-container">
+                        <label>Couleurs disponibles :</label>
+                        <a href="gerer_marques.php?type=couleurs" class="btn-gestion">Gérer</a>
+                    </div>
+                    <div class="checkboxes">
+                        <?php foreach ($couleurs as $c): ?>
+                            <label>
+                                <input type="checkbox" name="couleurs[]" value="<?= $c['id_couleur'] ?>"
+                                    <?= in_array($c['id_couleur'], $_POST['couleurs'] ?? []) ? 'checked' : '' ?>>
+                                <span class="color-badge" style="background-color: <?= htmlspecialchars($c['code_hex']) ?>;"></span>
+                                <?= htmlspecialchars($c['nom_couleur']) ?>
+                            </label>
                         <?php endforeach; ?>
-                    </select>
-                    <a href="gerer_marques.php<?= isset($_GET['id']) ? '&id=' . (int)$_GET['id'] : '' ?>" class="btn-gestion">+ Gérer</a>
+                    </div>
+                    <?php if (isset($errors['couleurs'])): ?>
+                        <span class="error-message"><?= $errors['couleurs'] ?></span>
+                    <?php endif; ?>
                 </div>
-
-                <label>RAM :</label>
-                <select name="ram_id" required>
-                    <option value="">-- Choisir la RAM --</option>
-                    <?php foreach ($rams as $r): ?>
-                        <option value="<?= $r['id_ram'] ?>" <?= ($_POST['ram_id'] ?? '') == $r['id_ram'] ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($r['capacite_ram']) ?> Go
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-
-                <label>ROM :</label>
-                <select name="rom_id" required>
-                    <option value="">-- Choisir la ROM --</option>
-                    <?php foreach ($roms as $r): ?>
-                        <option value="<?= $r['id_rom'] ?>" <?= ($_POST['rom_id'] ?? '') == $r['id_rom'] ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($r['capacite_rom']) ?> Go
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-
-                <label>Écran :</label>
-                <input type="text" name="ecran" value="<?= htmlspecialchars($_POST['ecran'] ?? '') ?>" required>
-
-                <label>Description :</label>
-                <textarea name="description" rows="4" required><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
-
-                <label>Couleurs disponibles :</label>
-                <div class="checkboxes">
-                    <?php foreach ($couleurs as $c): ?>
-                        <label>
-                            <input type="checkbox" name="couleurs[]" value="<?= $c['id_couleur'] ?>"
-                                <?= in_array($c['id_couleur'], $_POST['couleurs'] ?? []) ? 'checked' : '' ?>>
-                            <span class="color-badge" style="background-color: <?= htmlspecialchars($c['code_hex']) ?>;"></span>
-                            <?= htmlspecialchars($c['nom_couleur']) ?>
-                        </label>
-                    <?php endforeach; ?>
-                </div>
-
                 <br>
                 <button type="submit" class="btn">Ajouter</button>
             </form>
