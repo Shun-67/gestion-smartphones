@@ -1,6 +1,7 @@
 <?php
 require_once 'bd_connexion.php';
 require_once 'init_session.php';
+$currentPage = 'liste.php';
 
 $role = $_SESSION['role'];
 
@@ -51,46 +52,58 @@ $couleurs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <title>Détails - <?= htmlspecialchars($nom) ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
     <link rel="stylesheet" href="../css/details.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/layout.css">
 </head>
 
 <body>
 
-    <?php include 'sidebar.php'; ?>
+    <aside><?php include 'sidebar.php'; ?></aside>
 
-    <div class="container">
-        <div class="card">
-            <img src="<?= htmlspecialchars($photo) ?>" alt="Photo du téléphone" class="photo">
+    <main>
+        <div class="container">
+            <h2 class="page-title">Détails du smartphone</h2>
+            <div class="card">
+                <img src="<?= htmlspecialchars($photo) ?>" alt="Photo du téléphone" class="photo">
 
-            <div class="info">
-                <h1><?= htmlspecialchars($nom) ?></h1>
-                <p><strong>Marque :</strong> <?= htmlspecialchars($nom_marque) ?></p>
-                <p><strong>Prix :</strong> <?= number_format($prix, 0, ',', ' ') ?> FCFA</p>
-                <p><strong>RAM :</strong> <?= htmlspecialchars($capacite_ram) ?></p>
-                <p><strong>ROM :</strong> <?= htmlspecialchars($capacite_rom) ?></p>
+                <div class="info">
+                    <h1><?= htmlspecialchars($nom) ?></h1>
+                    <p><strong>Marque :</strong> <?= htmlspecialchars($nom_marque) ?></p>
+                    <p><strong>Prix :</strong> <?= number_format($prix, 0, ',', ' ') ?> FCFA</p>
+                    <p><strong>RAM :</strong> <?= htmlspecialchars($capacite_ram) ?> Go</p>
+                    <p><strong>ROM :</strong> <?= htmlspecialchars($capacite_rom) ?> Go</p>
+                    <p><strong>Ecran :</strong> <?= htmlspecialchars($ecran) ?> Go</p>
 
-                <?php if ($couleurs): ?>
-                    <p><strong>Couleurs disponibles :</strong></p>
-                    <div class="couleurs">
-                        <?php foreach ($couleurs as $c): ?>
-                            <span class="pastille" title="<?= htmlspecialchars($c['nom_couleur']) ?>"
-                                style="background-color: <?= htmlspecialchars($c['code_hex']) ?>;"></span>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-
-                <div class="actions">
-                    <a href="liste.php" class="btn">← Retour</a>
-
-                    <?php if ($role === 'admin'): ?>
-                        <a href="modifier.php?id=<?= $phone['id'] ?>" class="btn modifier">Modifier</a>
-                        <a href="supprimer.php?id=<?= $phone['id'] ?>" class="btn supprimer"
-                            onclick="return confirm('Supprimer ce téléphone ?')">Supprimer</a>
+                    <?php if ($couleurs): ?>
+                        <div>
+                            <p><strong>Couleurs disponibles :</strong></p>
+                            <div class="couleurs">
+                                <?php foreach ($couleurs as $c): ?>
+                                    <span class="pastille" title="<?= htmlspecialchars($c['nom_couleur']) ?>"
+                                        style="background-color: <?= htmlspecialchars($c['code_hex']) ?>;"></span>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
                     <?php endif; ?>
+
+                    <div class="actions">
+                        <a href="liste.php" class="btn">← Retour</a>
+
+                        <?php if ($role === 'admin'): ?>
+                            <a href="modifier.php?id=<?= $phone['id'] ?>" class="btn modifier">Modifier</a>
+                            <a href="supprimer.php?id=<?= $phone['id'] ?>" class="btn supprimer"
+                                onclick="return confirm('Supprimer ce téléphone ?')">Supprimer</a>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; <?= date('Y') ?> MonSite - Tous droits réservés.</p>
+    </footer>
 
 </body>
 

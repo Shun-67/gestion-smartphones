@@ -1,6 +1,6 @@
-<?php
-$currentPage = basename($_SERVER['PHP_SELF']);
-?>
+<!-- <?php
+// $currentPage = basename($_SERVER['PHP_SELF']);
+?> -->
 
 
 <div class="sidebar">

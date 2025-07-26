@@ -1,3 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  background: linear-gradient(
+    266.34deg,
+    #f5f7fc 0%,
+    rgba(245, 247, 252, 0.2) 100%
+  );
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -19,7 +37,7 @@
 .sidebar h2 {
   text-align: center;
   padding: 10px 0;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: 20px;
   border-bottom: 1px solid #0bf4d5;
 }
@@ -38,8 +56,8 @@
 }
 
 .sidebar a.active {
-    background-color: #313367;
-    /* background-color: #2c3e50; */
+  background-color: #313367;
+  /* background-color: #2c3e50; */
   /* background-color: #1f2a35; */
 }
 
@@ -78,4 +96,20 @@
 .bottom {
   margin-top: auto;
   /* padding-bottom: 0px; */
+}
+
+
+
+.footer {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* centrer horizontalement */
+  align-items: center; /* ou center si tu veux aussi centrer verticalement */
+  padding: 40px 20px;
+  text-align: center;
+  background: #f0f0f0;
+  color: #555;
+  font-size: 14px;
+  margin-top: auto;
+  border-top: 1px solid #ddd;
 }
