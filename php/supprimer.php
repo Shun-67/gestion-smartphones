@@ -1,5 +1,5 @@
 <?php
-require_once 'db_connection.php';
+require_once 'bd_connexion.php';
 $id = $_GET['id'] ?? null;
 if ($id) {
     $sql = "DELETE FROM smartphones WHERE id = ?";
