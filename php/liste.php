@@ -41,7 +41,7 @@
                 <input type="text" name="recherche" placeholder="Recherche..." value="<?= htmlspecialchars($recherche) ?>" />
                 <div class="separator"></div>
                 <?php if ($role === 'admin'): ?>
-                    <div class="add-icon"><i class="ri-add-circle-fill"></i></div>
+                    <div class="add-icon"><a href="ajouter.php"><i class="ri-add-circle-fill"></i></a></div>
                 <?php endif; ?>
 
             </form>
@@ -95,8 +95,8 @@
     </main>
 
     <footer class="footer">
-            <p>&copy; <?= date('Y') ?> MonSite - Tous droits réservés.</p>
-        </footer>
+        <p>&copy; <?= date('Y') ?> Smartphone App - Tous droits réservés.</p>
+    </footer>
 
 </body>
 

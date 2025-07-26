@@ -102,7 +102,7 @@ $couleurs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     </main>
 
     <footer class="footer">
-        <p>&copy; <?= date('Y') ?> MonSite - Tous droits réservés.</p>
+        <p>&copy; <?= date('Y') ?> Smartphone App - Tous droits réservés.</p>
     </footer>
 
 </body>

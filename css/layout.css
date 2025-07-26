@@ -57,8 +57,6 @@ body {
 
 .sidebar a.active {
   background-color: #313367;
-  /* background-color: #2c3e50; */
-  /* background-color: #1f2a35; */
 }
 
 .sidebar a.active::before {
@@ -69,8 +67,6 @@ body {
   height: 100%;
   width: 4px;
   background-color: #0bf4d5;
-  /* background-color: #28a745; */
-  /* background-color: #1abc9c; */
   border-radius: 2px 0 0 2px;
   animation: slideIn 0.3s ease-out;
 }
@@ -95,7 +91,6 @@ body {
 
 .bottom {
   margin-top: auto;
-  /* padding-bottom: 0px; */
 }
 
 
@@ -103,13 +98,13 @@ body {
 .footer {
   flex: 1;
   display: flex;
-  justify-content: center; /* centrer horizontalement */
-  align-items: center; /* ou center si tu veux aussi centrer verticalement */
-  padding: 40px 20px;
-  text-align: center;
+  justify-content: center; 
+  align-items: center; 
   background: #f0f0f0;
   color: #555;
   font-size: 14px;
+  padding: 20px;
+  margin-left: 220px;
   margin-top: auto;
   border-top: 1px solid #ddd;
 }
