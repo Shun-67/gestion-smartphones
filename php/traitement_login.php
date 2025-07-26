@@ -51,6 +51,7 @@ function traitement_login_connexion($vformData)
         // Vérifier le mot de passe
         if (password_verify($vpassword, $utilisateur['password'])) {
             $_SESSION['id'] = $utilisateur['id_utilisateur'];
+            unset($_SESSION['old_input']);
             header('Location: liste.php?id=' . $_SESSION['id']);
             exit;
         } else {
@@ -98,6 +99,7 @@ function traitement_login_inscription($vformData)
     mysqli_stmt_close($stmt);
 
     $_SESSION['id'] = mysqli_insert_id($cnx); // Récupérer l'ID de l'utilisateur nouvellement créé
+    unset($_SESSION['old_input']);
     header('Location: liste.php?id=' . $_SESSION['id']);
     exit;
 }

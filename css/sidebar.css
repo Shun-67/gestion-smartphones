@@ -18,8 +18,10 @@
 
 .sidebar h2 {
   text-align: center;
+  padding: 10px 0;
   margin-bottom: 30px;
   font-size: 20px;
+  border-bottom: 1px solid #0bf4d5;
 }
 
 .sidebar a {

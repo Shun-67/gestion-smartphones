@@ -10,6 +10,19 @@ require_once 'bd_connexion.php';
 
 // $sql4 = "INSERT INTO couleurs (nom_couleur) VALUES ('Rouge'), ('Orange'), ('Jaune'), ('Vert'), ('Bleue'), ('Violet'), ('Noir'), ('Gris'), ('Blanc')";
 
+$sql4 = "INSERT INTO couleurs (nom_couleur, code_hex) VALUES
+('Rouge', '#FF0000'),
+('Orange', '#FFA500'),
+('Jaune', '#FFFF00'),
+('Vert', '#008000'),
+('Bleu', '#0000FF'),
+('Indigo', '#4B0082'),
+('Violet', '#EE82EE'),
+('Blanc', '#FFFFFF'),
+('Noir', '#000000'),
+('Gris', '#808080')
+";
+
 // $sql5 = "INSERT INTO smartphone_couleurs (id, id_couleur)
 // VALUES
 // (1, 7), (1, 3),

@@ -1,5 +1,6 @@
 <?php
 require_once 'init_session.php'; // Pour démarrer la session
+
 $empty_errors = $_SESSION['form_errors'] ?? [];
 $login_error = $_SESSION['login_error'] ?? '';
 $oldInput = $_SESSION['old_input'] ?? [];
