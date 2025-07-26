@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
 require_once 'bd_connexion.php';
-=======
-require_once 'bd_connection.php';
->>>>>>> 169d52d44ea26051093614c7590517f57b7fa78c
 $id = $_GET['id'] ?? null;
 if ($id) {
     $sql = "DELETE FROM smartphones WHERE id = ?";
