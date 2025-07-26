@@ -1,9 +1,21 @@
+main {
+    margin-left: 220px;
+  flex: 1;
+  display: flex;
+  align-items: center; /* ou center si tu veux aussi centrer verticalement */
+  padding: 40px 20px;
+}
+
 .form-ajout {
   display: flex;
   flex-direction: column;
   gap: 14px;
   max-width: 600px;
   margin-top: 20px;
+}
+
+.form-ajout label {
+    color: #2a365b;
 }
 
 .form-ajout input[type="text"],
@@ -27,3 +39,86 @@
   gap: 5px;
   font-size: 14px;
 }
+
+.color-badge {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 6px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}
+
+/* Style bouton */
+.btn {
+  background-color: #007bff; /* bleu sympa */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3; /* bleu plus foncé au hover */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn:active {
+  background-color: #004080;
+}
+
+
+.select-add-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.select-add-container select {
+    flex-grow: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* .add-link {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.add-link:hover {
+    background-color: #218838;
+} */
+
+.btn-gestion {
+  display: inline-block;
+  padding: 6px 14px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-gestion:hover {
+  background-color: #0056b3;
+}
+
+
