@@ -53,42 +53,27 @@
 
                     </div>
                 <?php else: ?>
-                    <?php $id_marque_actuel = $id_marque_selected ?? null; ?>
+                    <?php foreach ($groupes_phones as $nom_marque => $telephones): ?>
+                            <h2 class="titre-marque"><?= htmlspecialchars($nom_marque) ?></h2>
 
-                    <?php foreach ($phones as $phone): ?>
-                        <?php if ($id_marque_actuel !== $phone['id_marque']): ?>
-                            <?php $id_marque_actuel =  $phone['id_marque']; ?>
-                            <?php foreach ($marques as $m) {
-                                if ($id_marque_actuel == $m['id_marque']) {
-                                    $nom_marque_actuel = $m['nom_marque'];
-                                }
-                            }
-                            ?>
-                            <h2 class="titre-marque"><?= htmlspecialchars($nom_marque_actuel) ?></h2>
-                        <?php endif; ?>
                         <div class="grid">
-                            <div class="card">
+                            <?php foreach ($telephones as $phone): ?>
                                 <?php
                                 $photo = !empty($phone["photo"]) ? htmlspecialchars($phone["photo"]) : 'images/default.jpg';
                                 ?>
-                                <div>
-                                    <a href="details.php?id=<?= $phone['id'] ?>" class="details"><img src="..<?= htmlspecialchars($phone["photo"]) ?>" alt="Smartphone"></a>
+                                <div class="card">
+                                    <div>
+                                        <a href="details.php?id=<?= $phone['id'] ?>" class="details">
+                                            <img src="..<?= $photo ?>" alt="Smartphone">
+                                        </a>
+                                    </div>
+                                    <h3><?= htmlspecialchars($phone['nom']) ?></h3>
+                                    <p><?= number_format($phone['prix'], 0, ',', ' ') ?> FCFA</p>
                                 </div>
-                                <h3><?= htmlspecialchars($phone['nom']) ?></h3>
-                                <p><?= number_format($phone['prix'], 0, ',', ' ') ?> FCFA</p>
-
-                                <!-- <div class="actions">
-                                <a href="details.php?id=<?= $phone['id'] ?>" class="details"><i class="ri-eye-fill"></i></a>
-                                <?php if ($role === 'admin'): ?>
-                                    <a href="modifier.php?id=<?= $phone['id'] ?>" class="edit"><i class="ri-edit-2-fill"></i></a>
-                                    <a href="supprimer.php?id=<?= $phone['id'] ?>" class="delete" onclick="return confirm('Supprimer ce smartphone ?')"><i class="ri-delete-bin-6-fill"></i></a>
-                                <?php endif; ?>
-                            </div> -->
-                            </div>
-
+                            <?php endforeach; ?>
                         </div>
                     <?php endforeach; ?>
-                <?php endif; ?>
+            <?php endif; ?>
             </div>
         </div>
     </main>

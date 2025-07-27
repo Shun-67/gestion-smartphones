@@ -10,24 +10,24 @@ require_once 'bd_connexion.php';
 
 // $sql4 = "INSERT INTO couleurs (nom_couleur) VALUES ('Rouge'), ('Orange'), ('Jaune'), ('Vert'), ('Bleue'), ('Violet'), ('Noir'), ('Gris'), ('Blanc')";
 
-$sql4 = "INSERT INTO couleurs (nom_couleur, code_hex) VALUES
-('Rouge', '#FF0000'),
-('Orange', '#FFA500'),
-('Jaune', '#FFFF00'),
-('Vert', '#008000'),
-('Bleu', '#0000FF'),
-('Indigo', '#4B0082'),
-('Violet', '#EE82EE'),
-('Blanc', '#FFFFFF'),
-('Noir', '#000000'),
-('Gris', '#808080')
-";
+// $sql4 = "INSERT INTO couleurs (nom_couleur, code_hex) VALUES
+// ('Rouge', '#FF0000'),
+// ('Orange', '#FFA500'),
+// ('Jaune', '#FFFF00'),
+// ('Vert', '#008000'),
+// ('Bleu', '#0000FF'),
+// ('Indigo', '#4B0082'),
+// ('Violet', '#EE82EE'),
+// ('Blanc', '#FFFFFF'),
+// ('Noir', '#000000'),
+// ('Gris', '#808080')
+// ";
 
-// $sql5 = "INSERT INTO smartphone_couleurs (id, id_couleur)
-// VALUES
-// (1, 7), (1, 3),
-// (2, 4), (2, 6),
-// (3, 1), (3, 4)";
+$sql5 = "INSERT INTO smartphone_couleurs (id, id_couleur)
+VALUES
+(1, 7), (1, 3),
+(2, 4), (2, 6),
+(3, 1), (3, 4)";
 
 $sql = "INSERT INTO smartphones (nom, description, prix, photo, id_marque, id_ram, id_rom, ecran)
 VALUES
@@ -41,8 +41,9 @@ VALUES
 // $inserted1 = mysqli_query($cnx, $sql1) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
 // $inserted2 = mysqli_query($cnx, $sql2) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
 // $inserted3 = mysqli_query($cnx, $sql3) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
-$inserted4 = mysqli_query($cnx, $sql4) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
-// $inserted5 = mysqli_query($cnx, $sql5) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
+// $inserted4 = mysqli_query($cnx, $sql4) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
 $inserted = mysqli_query($cnx, $sql) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
+$inserted5 = mysqli_query($cnx, $sql5) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
+
 
 ?>

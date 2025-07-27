@@ -70,7 +70,6 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th><?= htmlspecialchars($label) ?></th>
                         <th class="action"></th>
                         <th class="action"></th>
@@ -79,8 +78,14 @@
                 <tbody>
                     <?php foreach ($items as $item): ?>
                         <tr>
-                            <td><?= htmlspecialchars($item["id_$type"]) ?></td>
-                            <td><?= htmlspecialchars($item[$champ]) ?></td>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <?php if ($type === 'couleur'): ?>
+                                        <span class="color-badge" style="background-color:<?= htmlspecialchars($item['code_hex']) ?>;"></span>
+                                    <?php endif; ?>
+                                    <span style="line-height: 0;"><?= htmlspecialchars($item[$champ]) ?></span>
+                                </div>
+                            </td>
                             <td>
                                 <a href="gestion.php?type=<?= $type ?>&edit=<?= $item["id_$type"] ?>" class="icon icon-edit"><i class="ri-edit-fill"></i></a>
                             </td>

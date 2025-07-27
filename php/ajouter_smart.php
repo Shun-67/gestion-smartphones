@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$nom) $errors['nom'] = "Le nom est requis.";
     if ($prix <= 0) $errors['prix'] = "Le prix doit être positif.";
     if (!$prix) $errors['prix'] = "Le prix est requis.";
-    if (!$photo) $errors['photo'] = "Le lien de la photo est requis.";
+    // if (!$photo) $errors['photo'] = "Le lien de la photo est requis.";
     if (!$marque_id) $errors['marque'] = "Sélectionnez une marque.";
     if (!$ram_id) $errors['ram'] = "Sélectionnez une RAM.";
     if (!$rom_id) $errors['rom'] = "Sélectionnez une ROM.";
@@ -85,8 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (in_array($ext, $allowed) && getimagesize($tmp_name)) {
             // Nom unique pour éviter les collisions
             $new_name = uniqid('img_', true) . '.' . $ext;
-            $photo_path_1 = '..' . $upload_dir . $new_name;
-            move_uploaded_file($tmp_name, $photo_path_1);
+            $photo_path = $upload_dir . $new_name;
         } else {
             $errors['photo'] = "Le fichier doit être une image valide (jpg, png, gif, webp).";
         }
@@ -95,6 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
+        //Insertion de l'image dans le dossier d'images
+        $photo_path_1 = '..' . $upload_dir . $new_name;
+        move_uploaded_file($tmp_name, $photo_path_1);
+
         // Insertion du smartphone
         $stmt = mysqli_prepare($cnx, "INSERT INTO smartphones 
             (nom, prix, photo, id_marque, id_ram, id_rom, description, ecran)
@@ -102,10 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         mysqli_stmt_bind_param(
             $stmt,
-            "sdssiiis",
+            "sdssiiss",
             $nom,
             $prix,
-            $photo,
+            $photo_path,
             $marque_id,
             $ram_id,
             $rom_id,
@@ -132,8 +135,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Redirection
-    header("Location: details.php?id=" . $smartphone_id);
-    exit;
+    // header("Location: details.php?id=" . $smartphone_id);
+    // exit;
 }
 
 
@@ -158,11 +161,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
             <h1 class="page-title">Ajouter un smartphone</h1>
 
-            <form method="post" class="form-ajout" enctype="multipart/form-data">
+            <form method="post" action="ajouter_smart.php" class="form-ajout" enctype="multipart/form-data">
 
                 <div class="fill-container">
                     <label>Nom :</label>
-                    <input type="text" name="nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>">
+                    <input type="text" name="nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" require>
                     <?php if (isset($errors['marque'])): ?>
                         <span class="error-message"><?= $errors['nom'] ?></span>
                     <?php endif; ?>

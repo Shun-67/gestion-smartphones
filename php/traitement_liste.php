@@ -19,6 +19,9 @@ $user_role = mysqli_fetch_assoc($result) ?? ['role' => 'simple'];
 $role = $user_role['role'];
 $_SESSION['role'] = $role;
 
+echo $id;
+echo $role;
+
 // Marques
 $marque_query = mysqli_query($cnx, 'SELECT * FROM marques');
 $marques = mysqli_fetch_all($marque_query, MYSQLI_ASSOC);
@@ -63,4 +66,18 @@ if (!empty($params)) {
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $phones = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+//Regrouper les téléphones par marque
+$groupes_phones = [];
+
+$marque_map = [];
+foreach ($marques as $m) {
+    $marque_map[$m['id_marque']] = $m['nom_marque'];
+}
+
+foreach ($phones as $p) {
+    $nom_marque = $marque_map[$p['id_marque']] ?? 'Inconnue';
+    $groupes_phones[$nom_marque][] = $p;
+}
+
 ?>
