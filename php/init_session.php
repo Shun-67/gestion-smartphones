@@ -9,6 +9,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 header("Cache-Control: no-cache, no-store, must-revalidate"); // empêche mise en cache
-header("Pragma: no-cache"); // compatibilité ancienne
-header("Expires: 0"); // pour les proxies
+header("Pragma: no-cache"); 
+header("Expires: 0"); 
 ?>
