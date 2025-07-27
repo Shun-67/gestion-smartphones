@@ -102,7 +102,7 @@
         <?php if ($from == 'formulaire'): ?>
             <button class="retour"><a href="ajouter_smart.php">← Retour au formulaire</a></button>
         <?php elseif ($from == 'parametres'): ?>
-            <button class="retour"><a href="ajouter_smart.php">← Retour aux paramètres</a></button>
+            <button class="retour"><a href="parametres.php">← Retour aux paramètres</a></button>
         <?php endif; ?>
 
     </main>
