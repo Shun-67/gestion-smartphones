@@ -56,9 +56,9 @@ $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = trim($_POST['nom'] ?? '');
     $prix = floatval($_POST['prix'] ?? 0);
-    $marque_id = intval($_POST['marque_id'] ?? 0);
-    $ram_id = intval($_POST['ram_id'] ?? 0);
-    $rom_id = intval($_POST['rom_id'] ?? 0);
+    $marque_id = intval($_POST['id_marque'] ?? 0);
+    $ram_id = intval($_POST['id_ram'] ?? 0);
+    $rom_id = intval($_POST['id_rom'] ?? 0);
     $description = trim($_POST['description'] ?? '');
     $ecran = trim($_POST['ecran'] ?? '');
     $couleurs_id = $_POST['couleurs'] ?? [];
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         $stmt = mysqli_prepare($cnx, "UPDATE smartphones SET nom=?, prix=?, photo=?, id_marque=?, id_ram=?, id_rom=?, description=?, ecran=? WHERE id=?");
-        mysqli_stmt_bind_param($stmt, "sdssiiisi", $nom, $prix, $photo, $marque_id, $ram_id, $rom_id, $description, $ecran, $id);
+        mysqli_stmt_bind_param($stmt, "sdsiiissi", $nom, $prix, $photo, $marque_id, $ram_id, $rom_id, $description, $ecran, $id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
@@ -109,4 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: details.php?id=$id");
         exit;
     }
+
+    print_r($errors);
 }
