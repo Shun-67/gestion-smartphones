@@ -5,7 +5,7 @@ $currentPage = 'liste.php';
 
 $role = $_SESSION['role'];
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['role'])) {
     header("Location: login_form.php");
     exit;
 }

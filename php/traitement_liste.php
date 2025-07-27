@@ -1,13 +1,13 @@
 <?php
 $currentPage = 'liste.php';
 
+require_once 'bd_connexion.php';
+require_once 'init_session.php';
+
 if (!isset($_SESSION['id'])) {
     header("Location: login_form.php");
     exit;
 }
-
-require_once 'bd_connexion.php';
-require_once 'init_session.php';
 
 $id = $_SESSION['id'];
 $marque_selected = $_GET['marque'] ?? 'all';

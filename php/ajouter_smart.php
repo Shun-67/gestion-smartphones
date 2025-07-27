@@ -2,7 +2,7 @@
 require_once 'bd_connexion.php';
 require_once 'init_session.php';
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['role'])) {
     header("Location: login_form.php");
     exit;
 }

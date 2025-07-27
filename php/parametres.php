@@ -1,7 +1,7 @@
 <?php
 require_once 'init_session.php'; // ou tout fichier qui initialise la session
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['role'])) {
     header("Location: login_form.php");
     exit;
 }
