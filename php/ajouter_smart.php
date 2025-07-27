@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ecran = trim($_POST['ecran'] ?? '');
     $couleurs_id = $_POST['couleurs'] ?? [];
 
-    echo $photo;    
+    echo $photo;
 
     if (!$nom) $errors['nom'] = "Le nom est requis.";
     if ($prix <= 0) $errors['prix'] = "Le prix doit être positif.";
@@ -72,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$ecran) $errors['ecran'] = "Le type d'écran est requis.";
     if (!$couleurs_id) $errors['couleurs'] = "Sélectionnez au moins une couleur.";
 
-    // if (empty($errors)) {
     // --- 1. Vérification et enregistrement de l'image ---
     $upload_dir = '/images/';
     $photo_path = '';
@@ -91,31 +90,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $errors['photo'] = "Le fichier doit être une image valide (jpg, png, gif, webp).";
         }
-    } 
-    else {
+    } else {
         $errors['photo'] = "Veuillez choisir une image.";
     }
-    // }
 
     if (empty($errors)) {
-    // Insertion du smartphone
-    $stmt = mysqli_prepare($cnx, "INSERT INTO smartphones 
-        (nom, prix, photo, id_marque, id_ram, id_rom, description, ecran)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        // Insertion du smartphone
+        $stmt = mysqli_prepare($cnx, "INSERT INTO smartphones 
+            (nom, prix, photo, id_marque, id_ram, id_rom, description, ecran)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-    mysqli_stmt_bind_param($stmt, "sdssiiis", 
-        $nom, $prix, $photo, $marque_id, $ram_id, $rom_id, $description, $ecran);
-    
-    mysqli_stmt_execute($stmt);
-    $smartphone_id = mysqli_insert_id($cnx);
-    mysqli_stmt_close($stmt);
+        mysqli_stmt_bind_param(
+            $stmt,
+            "sdssiiis",
+            $nom,
+            $prix,
+            $photo,
+            $marque_id,
+            $ram_id,
+            $rom_id,
+            $description,
+            $ecran
+        );
 
-    // Insertion des couleurs associées
-    $stmtC = mysqli_prepare($cnx, "INSERT INTO smartphone_couleurs (id, id_couleur) VALUES (?, ?)");
+        mysqli_stmt_execute($stmt);
+        $smartphone_id = mysqli_insert_id($cnx);
+        mysqli_stmt_close($stmt);
 
-    foreach ($couleurs_id as $cid) {
-        mysqli_stmt_bind_param($stmtC, "ii", $smartphone_id, $cid);
-        mysqli_stmt_execute($stmtC);
+        // Insertion des couleurs associées
+        $stmtC = mysqli_prepare($cnx, "INSERT INTO smartphone_couleurs (id, id_couleur) VALUES (?, ?)");
+
+        foreach ($couleurs_id as $cid) {
+            mysqli_stmt_bind_param($stmtC, "ii", $smartphone_id, $cid);
+            mysqli_stmt_execute($stmtC);
         }
         mysqli_stmt_close($stmtC);
 
@@ -123,7 +130,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: details.php?id=" . $smartphone_id);
         exit;
     }
-    mysqli_stmt_close($stmtC);
 
     // Redirection
     header("Location: details.php?id=" . $smartphone_id);
