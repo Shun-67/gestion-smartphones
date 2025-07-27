@@ -2,6 +2,11 @@
 require_once 'bd_connexion.php';
 require_once 'init_session.php';
 
+if (!isset($_SESSION['id'])) {
+    header("Location: login_form.php");
+    exit;
+}
+
 $currentPage = 'parametres.php';
 $role = $_SESSION['role'];
 
@@ -70,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['valeur'])) {
             if ($champ_type === 'i') {
                 $valeur = (int)$valeur;
             }
-            
+
             // Vérifier doublon
             $stmt = mysqli_prepare($cnx, "SELECT * FROM $table WHERE $champ = ?");
             mysqli_stmt_bind_param($stmt, $champ_type, $valeur);

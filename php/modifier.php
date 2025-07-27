@@ -1,7 +1,7 @@
 <?php require_once 'traitement_modifier.php'; ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -74,6 +74,10 @@
             <button class="btn modifier"><a href="details.php?id=<?= $phone['id'] ?>">Annuler</a></button>
         </form>
     </main>
+
+    <footer class="footer">
+        <p>&copy; <?= date('Y') ?> Smartphone App - Tous droits réservés.</p>
+    </footer>
 
 </body>
 

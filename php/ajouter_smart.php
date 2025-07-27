@@ -2,7 +2,12 @@
 require_once 'bd_connexion.php';
 require_once 'init_session.php';
 
-$currentPage = 'parametres.php';
+if (!isset($_SESSION['id'])) {
+    header("Location: login_form.php");
+    exit;
+}
+
+$currentPage = 'liste.php';
 
 $role = $_SESSION['role'];
 
@@ -200,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <a href="gestion.php?type=marque" class="btn-gestion">Gérer</a>
+                        <a href="gestion.php?type=marque&from=formulaire" class="btn-gestion">Gérer</a>
                     </div>
                     <?php if (isset($errors['marque'])): ?>
                         <span class="error-message"><?= $errors['marque'] ?></span>
@@ -219,7 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <a href="gestion.php?type=ram" class="btn-gestion">Gérer</a>
+                        <a href="gestion.php?type=ram&from=formulaire" class="btn-gestion">Gérer</a>
                     </div>
                     <?php if (isset($errors['ram'])): ?>
                         <span class="error-message"><?= $errors['ram'] ?></span>
@@ -237,7 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <a href="gestion.php?type=rom" class="btn-gestion">Gérer</a>
+                        <a href="gestion.php?type=rom&from=formulaire" class="btn-gestion">Gérer</a>
                     </div>
                     <?php if (isset($errors['rom'])): ?>
                         <span class="error-message"><?= $errors['rom'] ?></span>
@@ -263,7 +268,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="fill-container">
                     <div class="select-color-container">
                         <label>Couleurs disponibles :</label>
-                        <a href="gestion.php?type=couleur" class="btn-gestion">Gérer</a>
+                        <a href="gestion.php?type=couleur&from=formulaire" class="btn-gestion">Gérer</a>
                     </div>
                     <div class="checkboxes">
                         <?php foreach ($couleurs as $c): ?>

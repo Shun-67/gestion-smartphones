@@ -5,10 +5,11 @@ $currentPage = 'liste.php';
 
 $role = $_SESSION['role'];
 
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header('Location: liste.php');
+if (!isset($_SESSION['id'])) {
+    header("Location: login_form.php");
     exit;
 }
+
 
 $id = intval($_GET['id']);
 

@@ -1,0 +1,38 @@
+main {
+  margin-left: 220px;
+  flex: 1;
+  display: flex;
+  align-items: center; 
+  padding: 40px 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.setting-card {
+    background: #e6e4e4;
+    border-radius: 12px;
+    padding: 20px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+}
+
+.setting-card:hover {
+    background: #cccbcb;
+    transform: translateY(-3px);
+}
+
+.setting-card h2 {
+    font-size: 20px;
+}
