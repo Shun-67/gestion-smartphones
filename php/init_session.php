@@ -7,4 +7,8 @@ if (session_status() === PHP_SESSION_NONE) {
     // Cela permet d'éviter l'erreur "session already started"
     session_start();
 }
+
+header("Cache-Control: no-cache, no-store, must-revalidate"); // empêche mise en cache
+header("Pragma: no-cache"); // compatibilité ancienne
+header("Expires: 0"); // pour les proxies
 ?>

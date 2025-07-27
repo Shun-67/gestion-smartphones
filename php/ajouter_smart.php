@@ -138,17 +138,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: details.php?id=" . $smartphone_id);
         exit;
     }
-
-    // Redirection
-    // header("Location: details.php?id=" . $smartphone_id);
-    // exit;
 }
 
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -185,10 +181,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="fill-container">
-                    <!-- <label>Photo (URL ou chemin) :</label> -->
                     <label for="photo">Photo :</label>
                     <input type="file" name="photo" id="photo" accept="image/*" value="<?= htmlspecialchars($_POST['photo'] ?? '') ?>">
-                    <!-- <input type="text" name="photo" value="<?= htmlspecialchars($_POST['photo'] ?? '') ?>"> -->
                     <?php if (isset($errors['photo'])): ?>
                         <span class="error-message"><?= $errors['photo'] ?></span>
                     <?php endif; ?>
