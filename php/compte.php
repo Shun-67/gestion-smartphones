@@ -7,6 +7,8 @@ if (!isset($_SESSION['role'])) {
     exit;
 }
 
+$currentPage = 'compte.php';
+
 $role = $_SESSION['role'];
 
 $user_id = $_SESSION['id'];
@@ -93,49 +95,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_account'])) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8" />
     <title>Mon compte</title>
     <link href="../css/layout.css" rel="stylesheet" />
     <link href="../css/compte.css" rel="stylesheet" />
 </head>
+
 <body>
-<aside><?php include 'sidebar.php'; ?></aside>
-<main>
-    <h1>Mon compte</h1>
+    <aside><?php include 'sidebar.php'; ?></aside>
+    <main>
+        <h1>Mon compte</h1>
 
-    <?php if ($success): ?>
-        <div class="success"><?= htmlspecialchars($success) ?></div>
-    <?php endif; ?>
+        <?php if ($success): ?>
+            <div class="success"><?= htmlspecialchars($success) ?></div>
+        <?php endif; ?>
 
-    <?php if ($errors): ?>
-        <div class="error">
-            <ul>
-                <?php foreach ($errors as $err): ?>
-                    <li><?= htmlspecialchars($err) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+        <?php if ($errors): ?>
+            <div class="error">
+                <ul>
+                    <?php foreach ($errors as $err): ?>
+                        <li><?= htmlspecialchars($err) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
-    <form method="post" action="mon_compte.php">
-        <label>Login :</label><br>
-        <input type="text" name="login" value="<?= htmlspecialchars($user['login']) ?>" required><br><br>
+        <form method="post" action="mon_compte.php" class="form-ajout">
+            <label>Login :</label>
+            <input type="text" name="login" value="<?= htmlspecialchars($user['login']) ?>" required>
 
-        <label>Nouveau mot de passe (laisser vide pour ne pas changer) :</label><br>
-        <input type="password" name="password"><br><br>
+            <label>Nouveau mot de passe (laisser vide pour ne pas changer) :</label>
+            <input type="password" name="password">
 
-        <label>Confirmer nouveau mot de passe :</label><br>
-        <input type="password" name="password_confirm"><br><br>
+            <label>Confirmer nouveau mot de passe :</label>
+            <input type="password" name="password_confirm">
 
-        <button type="submit">Modifier mon profil</button>
-    </form>
+            <button type="submit" class="btn">Modifier mon profil</button>
+        </form>
 
-    <hr>
+        <form method="post" action="mon_compte.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')">
+            <button type="submit" name="delete_account" class="delete-btn">Supprimer mon compte</button>
+        </form>
+    </main>
 
-    <form method="post" action="mon_compte.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')">
-        <button type="submit" name="delete_account" class="delete-btn">Supprimer mon compte</button>
-    </form>
-</main>
+    <footer class="footer">
+        <p>&copy; <?= date('Y') ?> Smartphone App - Tous droits réservés.</p>
+    </footer>
 </body>
+
 </html>

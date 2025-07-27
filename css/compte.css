@@ -14,6 +14,21 @@ main {
 form {
   margin-bottom: 2em;
 }
+
+.btn {
+  padding: 8px 14px;
+  text-decoration: none;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  transition: background 0.3s;
+  border: none;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
 button.delete-btn {
   background-color: #dc3545;
   color: white;
@@ -24,4 +39,26 @@ button.delete-btn {
 }
 button.delete-btn:hover {
   background-color: #b02a37;
+}
+
+
+.form-ajout {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.form-ajout label {
+  font-weight: bold;
+  color: #2a365b;
+}
+
+
+.form-ajout input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
 }
