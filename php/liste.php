@@ -72,7 +72,7 @@
                                 $photo = !empty($phone["photo"]) ? htmlspecialchars($phone["photo"]) : 'images/default.jpg';
                                 ?>
                                 <div>
-                                    <a href="details.php?id=<?= $phone['id'] ?>" class="details"><img src="<?= htmlspecialchars($phone["photo"]) ?>" alt="Smartphone"></a>
+                                    <a href="details.php?id=<?= $phone['id'] ?>" class="details"><img src="..<?= htmlspecialchars($phone["photo"]) ?>" alt="Smartphone"></a>
                                 </div>
                                 <h3><?= htmlspecialchars($phone['nom']) ?></h3>
                                 <p><?= number_format($phone['prix'], 0, ',', ' ') ?> FCFA</p>

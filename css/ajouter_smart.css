@@ -21,6 +21,7 @@ main {
 
 .form-ajout input[type="text"],
 .form-ajout input[type="number"],
+.form-ajout input[type="file"],
 .form-ajout select {
   padding: 8px;
   border: 1px solid #ccc;

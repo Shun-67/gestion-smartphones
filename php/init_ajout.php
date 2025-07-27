@@ -31,9 +31,9 @@ $sql4 = "INSERT INTO couleurs (nom_couleur, code_hex) VALUES
 
 $sql = "INSERT INTO smartphones (nom, description, prix, photo, id_marque, id_ram, id_rom, ecran)
 VALUES
-('iPhone 13', 'Dernier iPhone avec puce A15', 999, '../images/iphone_13.png', 1, 2, 3, '6.1\" OLED'),
-('Galaxy S24', 'Smartphone Samsung haut de gamme', 799, '../images/galaxy_s24.png', 2, 2, 2, '6.2\" AMOLED'),
-('Redmi Note 10', 'Bon rapport qualité/prix', 199, '../images/redmi_note_11.png', 3, 1, 1, '6.5\" LCD')";
+('iPhone 13', 'Dernier iPhone avec puce A15', 999, '/images/iphone_13.png', 1, 2, 3, '6.1\" OLED'),
+('Galaxy S24', 'Smartphone Samsung haut de gamme', 799, '/images/galaxy_s24.png', 2, 2, 2, '6.2\" AMOLED'),
+('Redmi Note 10', 'Bon rapport qualité/prix', 199, '/images/redmi_note_11.png', 3, 1, 1, '6.5\" LCD')";
 
 
 
@@ -41,7 +41,7 @@ VALUES
 // $inserted1 = mysqli_query($cnx, $sql1) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
 // $inserted2 = mysqli_query($cnx, $sql2) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
 // $inserted3 = mysqli_query($cnx, $sql3) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
-// $inserted4 = mysqli_query($cnx, $sql4) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
+$inserted4 = mysqli_query($cnx, $sql4) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
 // $inserted5 = mysqli_query($cnx, $sql5) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
 $inserted = mysqli_query($cnx, $sql) or die('<br> Erreur pour inserer : ' . mysqli_error($cnx));
 

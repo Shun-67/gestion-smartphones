@@ -5,7 +5,6 @@ main {
   flex-direction: column;
   justify-content: center; 
   align-items: flex-start;
-  gap: 50px; 
   padding: 40px 20px;
 }
 
@@ -16,9 +15,10 @@ main {
     gap: 20px;
 }
 
-.add-edit h2 {
+.add-edit label {
   font-size: 15px;
   color: #2c3e50;
+  font-weight: bold;
 }
 
 
@@ -29,7 +29,8 @@ main {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 th,
 td {
@@ -38,12 +39,12 @@ td {
   text-align: left;
 }
 
-tr:nth-child(odd) {
+table tbody tr:nth-child(odd) {
     background: #849ebd20;
 }
 
-th{
-  background: #fff;
+table tbody tr:hover {
+    background: #0ab36418;
 }
 
 
@@ -65,16 +66,16 @@ th.action {
 }
 
 .icon-edit:hover i {
-  color: #00990a; /* couleur plus foncée au survol */
+  color: #405189; /* couleur plus foncée au survol */
 }
 
 .icon-edit {
-  color: #0ab364;
+  color: #607bd4;
   
 }
 
 .icon-delete {
-    color: #c10202;
+    color: #ac3f3f;
 }
 
 .icon-delete:hover {
@@ -98,6 +99,12 @@ a.btn:hover {
   background: #40518965
 } */
 
+form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
 form.inline {
   display: inline;
@@ -106,20 +113,63 @@ form.inline {
   color: red;
   margin-bottom: 10px;
 }
-input[type="text"] {
+input[type="text"], input[type="number"]{
   padding: 6px;
   width: 300px;
   border-radius: 4px;
   border: 1px solid #ccc;
 }
+
+/* input[type="color"] {
+      width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  display: inline-block;
+} */
+
+.color-input {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 70%; /* rend le champ circulaire */
+    padding: 0;
+    cursor: pointer;
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+}
+
+.color-input:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0,0,0,0.4);
+}
+
 button {
   padding: 6px 12px;
   border-radius: 5px;
   border: none;
-  background: #28a745;
   color: white;
   cursor: pointer;
 }
-button:hover {
+
+button a {
+    text-decoration: none;
+    color: inherit;
+}
+
+form button {
+    background: #28a745;
+}
+
+form button:hover {
   background: #218838;
+}
+
+.retour {
+    font-size: medium;
+    background-color:  #007bff;;
+}
+
+.retour:hover {
+    background-color: #0056b3;
 }

@@ -63,7 +63,7 @@ $couleurs = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="container">
             <h1 class="page-title">Détails du smartphone</h1>
             <div class="card">
-                <img src="<?= htmlspecialchars($photo) ?>" alt="Photo du téléphone" class="photo">
+                <img src="..<?= htmlspecialchars($photo) ?>" alt="Photo du téléphone" class="photo">
 
                 <div class="info">
                     <h2><?= htmlspecialchars($nom) ?></h2>

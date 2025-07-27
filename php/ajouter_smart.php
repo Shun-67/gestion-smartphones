@@ -59,6 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ecran = trim($_POST['ecran'] ?? '');
     $couleurs_id = $_POST['couleurs'] ?? [];
 
+    echo $photo;    
+
     if (!$nom) $errors['nom'] = "Le nom est requis.";
     if ($prix <= 0) $errors['prix'] = "Le prix doit être positif.";
     if (!$prix) $errors['prix'] = "Le prix est requis.";
@@ -69,6 +71,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$description) $errors['description'] = "La description est requise.";
     if (!$ecran) $errors['ecran'] = "Le type d'écran est requis.";
     if (!$couleurs_id) $errors['couleurs'] = "Sélectionnez au moins une couleur.";
+
+    // if (empty($errors)) {
+    // --- 1. Vérification et enregistrement de l'image ---
+    $upload_dir = '/images/';
+    $photo_path = '';
+
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+        $tmp_name = $_FILES['photo']['tmp_name'];
+        $original_name = basename($_FILES['photo']['name']);
+        $ext = strtolower(pathinfo($original_name, PATHINFO_EXTENSION));
+        $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+        if (in_array($ext, $allowed) && getimagesize($tmp_name)) {
+            // Nom unique pour éviter les collisions
+            $new_name = uniqid('img_', true) . '.' . $ext;
+            $photo_path_1 = '..' . $upload_dir . $new_name;
+            move_uploaded_file($tmp_name, $photo_path_1);
+        } else {
+            $errors['photo'] = "Le fichier doit être une image valide (jpg, png, gif, webp).";
+        }
+    } 
+    else {
+        $errors['photo'] = "Veuillez choisir une image.";
+    }
+    // }
 
     if (empty($errors)) {
         // Insertion du smartphone
@@ -129,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
             <h1 class="page-title">Ajouter un smartphone</h1>
 
-            <form method="post" class="form-ajout">
+            <form method="post" class="form-ajout" enctype="multipart/form-data">
 
                 <div class="fill-container">
                     <label>Nom :</label>
@@ -141,16 +168,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="fill-container">
                     <label>Prix (FCFA) :</label>
-                    <input type="number" name="prix" value="<?= htmlspecialchars($_POST['prix'] ?? '') ?>" step="100">
+                    <input type="number" name="prix" value="<?= htmlspecialchars($_POST['prix'] ?? '') ?>" step="10000" min="0">
                     <?php if (isset($errors['marque'])): ?>
                         <span class="error-message"><?= $errors['prix'] ?></span>
                     <?php endif; ?>
                 </div>
 
                 <div class="fill-container">
-                    <label>Photo (URL ou chemin) :</label>
-                    <input type="text" name="photo" value="<?= htmlspecialchars($_POST['photo'] ?? '') ?>">
-                    <?php if (isset($errors['marque'])): ?>
+                    <!-- <label>Photo (URL ou chemin) :</label> -->
+                    <label for="photo">Photo :</label>
+                    <input type="file" name="photo" id="photo" accept="image/*" value="<?= htmlspecialchars($_POST['photo'] ?? '') ?>">
+                    <!-- <input type="text" name="photo" value="<?= htmlspecialchars($_POST['photo'] ?? '') ?>"> -->
+                    <?php if (isset($errors['photo'])): ?>
                         <span class="error-message"><?= $errors['photo'] ?></span>
                     <?php endif; ?>
                 </div>
@@ -166,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <a href="gerer_marques.php?type=marque" class="btn-gestion">Gérer</a>
+                        <a href="gestion.php?type=marque" class="btn-gestion">Gérer</a>
                     </div>
                     <?php if (isset($errors['marque'])): ?>
                         <span class="error-message"><?= $errors['marque'] ?></span>
@@ -185,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <a href="gerer_marques.php?type=ram" class="btn-gestion">Gérer</a>
+                        <a href="gestion.php?type=ram" class="btn-gestion">Gérer</a>
                     </div>
                     <?php if (isset($errors['ram'])): ?>
                         <span class="error-message"><?= $errors['ram'] ?></span>
@@ -203,7 +232,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <a href="gerer_marques.php?type=rom" class="btn-gestion">Gérer</a>
+                        <a href="gestion.php?type=rom" class="btn-gestion">Gérer</a>
                     </div>
                     <?php if (isset($errors['rom'])): ?>
                         <span class="error-message"><?= $errors['rom'] ?></span>
@@ -229,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="fill-container">
                     <div class="select-color-container">
                         <label>Couleurs disponibles :</label>
-                        <a href="gerer_marques.php?type=couleurs" class="btn-gestion">Gérer</a>
+                        <a href="gestion.php?type=couleur" class="btn-gestion">Gérer</a>
                     </div>
                     <div class="checkboxes">
                         <?php foreach ($couleurs as $c): ?>
@@ -250,6 +279,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </div>
     </main>
+
+    <footer class="footer">
+        <p>&copy; <?= date('Y') ?> Smartphone App - Tous droits réservés.</p>
+    </footer>
 </body>
 
 </html>
