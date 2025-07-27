@@ -70,12 +70,7 @@ $couleurs = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <p><strong>Marque :</strong> <?= htmlspecialchars($nom_marque) ?></p>
                     <p><strong>Prix :</strong> <?= number_format($prix, 0, ',', ' ') ?> FCFA</p>
                     <p><strong>RAM :</strong> <?= htmlspecialchars($capacite_ram) ?> Go</p>
-                    <p><strong>ROM :</strong> <?= htmlspecialchars($capacite_rom) ?> Go</p>
-<<<<<<< HEAD
                     <p><strong>Ecran :</strong> <?= htmlspecialchars($ecran) ?> </p>
-=======
-                    <p><strong>Ecran :</strong> <?= htmlspecialchars($ecran) ?></p>
->>>>>>> a2b01e9ea09a3eea26d22502af267173244f8d02
 
                     <?php if ($couleurs): ?>
                         <div>

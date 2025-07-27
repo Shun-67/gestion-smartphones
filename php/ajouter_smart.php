@@ -98,7 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // }
 
     if (empty($errors)) {
-<<<<<<< HEAD
     // Insertion du smartphone
     $stmt = mysqli_prepare($cnx, "INSERT INTO smartphones 
         (nom, prix, photo, id_marque, id_ram, id_rom, description, ecran)
@@ -117,7 +116,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($couleurs_id as $cid) {
         mysqli_stmt_bind_param($stmtC, "ii", $smartphone_id, $cid);
         mysqli_stmt_execute($stmtC);
-=======
         // Insertion du smartphone
         $stmt = mysqli_prepare($cnx, "INSERT INTO smartphones 
         (nom, prix, photo, id_marque, id_ram, id_rom, description, ecran)
@@ -152,7 +150,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Redirection
         header("Location: details.php?id=" . $smartphone_id);
         exit;
->>>>>>> a2b01e9ea09a3eea26d22502af267173244f8d02
     }
     mysqli_stmt_close($stmtC);
 
