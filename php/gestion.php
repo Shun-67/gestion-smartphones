@@ -98,7 +98,12 @@
             </table>
         </div>
 
-        <button class="retour"><a href="ajouter_smart.php">← Retour au formulaire d'ajout smartphone</a></button>
+        <?php $from= $_GET['from']; ?>
+        <?php if ($from == 'formulaire'): ?>
+            <button class="retour"><a href="ajouter_smart.php">← Retour au formulaire</a></button>
+        <?php elseif ($from == 'parametres'): ?>
+            <button class="retour"><a href="ajouter_smart.php">← Retour aux paramètres</a></button>
+        <?php endif; ?>
 
     </main>
 

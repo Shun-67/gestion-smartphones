@@ -2,7 +2,7 @@ main {
   margin-left: 220px;
   flex: 1;
   display: flex;
-  align-items: center; /* ou center si tu veux aussi centrer verticalement */
+  align-items: center; 
   padding: 40px 20px;
 }
 

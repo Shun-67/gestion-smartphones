@@ -2,6 +2,11 @@
 require_once 'bd_connexion.php';
 require_once 'init_session.php';
 
+if (!isset($_SESSION['id'])) {
+    header("Location: login_form.php");
+    exit;
+}
+
 $currentPage = 'liste.php';
 $role = $_SESSION['role'];
 
@@ -110,5 +115,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    print_r($errors);
 }

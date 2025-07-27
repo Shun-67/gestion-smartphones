@@ -3,6 +3,8 @@
 ?> -->
 
 
+
+
 <div class="sidebar">
   <div class="top">
     <h2>Smartphone App</h2>
@@ -23,7 +25,7 @@
       <i class="ri-user-3-fill"></i> Mon compte
     </a>
 
-    <a href="logout.php">
+    <a href="logout.php" onclick="return confirm('Se déconnecter ?');">
       <i class="ri-logout-box-line"></i> Déconnexion
     </a>
   </div>
